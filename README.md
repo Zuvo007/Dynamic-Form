@@ -17,16 +17,39 @@ Local Storage Management: Utility functions for getting and setting data
 Deployment: Vercel
 
 project-root
-│ README.md
+│   README.md
 │
 └── frontend
-├── public
-└── src
-├── components
-│ ├── DynamicForm
-│ |
-│ └── common
-├── constants
-├── schemas
-├── apiServices
-└── hooks
+    ├── public
+    └── src
+        ├── components
+        │   ├── DynamicForm
+        │   │   └── useDynamicForm.js
+        │   └── common
+        ├── constants
+        ├── schemas
+        ├── apiServices
+        └── hooks
+
+
+⚙️ Installation
+1. Clone the repository
+
+```
+git clone https://github.com/Zuvo007/Dynamic-Form.git
+cd firstwork-dynamic-form
+```
+2. Setup Frontend
+
+```
+cd frontend
+npm install
+```
+3. Run the Application
+
+```
+npm run dev
+```
+
+
+
