@@ -39,16 +39,33 @@ const useDynamicForm = () => {
 
     }, [formList, errors]);
 
-    console.log({ autoSaveLoading })
-
     const handleChange = (index, fieldId, value) => {
-        setActiveQstnId(index)
+        setActiveQstnId(index);
         const updatedFormList = [...formList];
-        updatedFormList[index][fieldId] = value;
+        let updatedFormData = { ...updatedFormList[index], [fieldId]: value };
+
+        const findChildren = (parentIds) => {
+            return questionSchema
+                .filter((field) => parentIds.includes(field.parent))
+                .reduce((acc, field) => {
+                    acc.push(field.id);
+                    return acc.concat(findChildren([field.id]));
+                }, []);
+        };
+
+        const childrenToRemove = findChildren([fieldId]);
+
+        childrenToRemove.forEach((childId) => {
+            delete updatedFormData[childId];
+        });
+
+        updatedFormList[index] = updatedFormData;
         setFormList(updatedFormList);
+
         validateField(index, fieldId, value);
         setAutoSaveLoading(true);
     };
+
 
     const validateField = (index, fieldId, value) => {
         const fieldErrors = { ...errors[index] };
